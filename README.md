@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run Tests
-        uses: rubengmurray/npm-test-action@v1
+        uses: rubengmurray/npm-test-action@0.0.1 # or @main
         with:
           test-command: 'test:unit' # Optional: defaults to 'test'
 ```
