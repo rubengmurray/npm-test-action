@@ -1,10 +1,26 @@
-name: Integration Test
+name: Shared Test Workflow
+
 on:
   workflow_call:
+    inputs:
+      test-command:
+        type: string
+        required: false
+        description: "The npm script to run for testing"
+        default: 'test'
+
 jobs:
   integration-test:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+          # Only fetch the latest commit (shallow clone)
+          fetch-depth: 1
+          # Ensure we only fetch the branch that triggered the workflow
+          persist-credentials: false
+
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
