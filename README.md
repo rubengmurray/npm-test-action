@@ -14,21 +14,16 @@ Most Node.js workflows require the same boilerplate over and over. This action r
 Create or update a file at `.github/workflows/test.yml`:
 
 ```yaml
-name: Test Suite
+name: CI Tests
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-      
-      - name: Run Tests
-        uses: rubengmurray/npm-test-action@0.0.1 # or @main
-        with:
-          test-command: 'test:unit' # Optional: defaults to 'test'
+  run-tests:
+    uses: rubengmurray/npm-test-action/.github/workflows/test.yml@main
+    with:
+      test-command: 'test:unit'  # Optional: defaults to 'test'
+
 ```
 
 # Prerequisites
