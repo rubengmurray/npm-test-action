@@ -24,7 +24,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
-        node-version-file: 'package.json'
+        node-version-file: './package.json'
         cache: 'npm'
 
     - name: Get Node Version from package.json
@@ -32,7 +32,7 @@ jobs:
       shell: bash
       run: |
         # Extract raw value from package.json
-        RAW=$(node -p "require('package.json').engines?.node || ''")
+        RAW=$(node -p "require('./package.json').engines?.node || ''")
         
         if [ -z "$RAW" ]; then
           echo "::error file=package.json::Missing 'engines.node' in package.json"
@@ -51,7 +51,7 @@ jobs:
       with:
         path: node_modules
         # Key includes OS, Node version, and lockfile hash
-        key: ${{ runner.os }}-node-${{ steps.node-version.outputs.version }}-${{ hashFiles('package.json', 'package-lock.json') }}
+        key: ${{ runner.os }}-node-${{ steps.node-version.outputs.version }}-${{ hashFiles('./package.json', './package-lock.json') }}
 
     - name: Install dependencies
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
