@@ -16,7 +16,7 @@ jobs:
       shell: bash
       run: |
         # Extract raw value from package.json
-        RAW=$(node -p "require('./package.json').engines?.node || ''")
+        RAW=$(node -p "require('package.json').engines?.node || ''")
         
         if [ -z "$RAW" ]; then
           echo "::error file=package.json::Missing 'engines.node' in package.json"
