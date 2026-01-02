@@ -8,6 +8,11 @@ on:
         required: false
         description: "The npm script to run for testing"
         default: 'test'
+      skip-cache:
+        type: boolean
+        required: false
+        description: 'Set to true to skip node_modules/npm caching'
+        default: 'false'
 
 jobs:
   integration-test:
@@ -25,7 +30,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version-file: './package.json'
-        cache: 'npm'
+        cache: ${{ inputs.skip-cache == 'true' && '' || 'npm' }}
 
     - name: Get Node Version from package.json
       id: node-version
@@ -46,6 +51,7 @@ jobs:
         echo "version=$TRIMMED" >> $GITHUB_OUTPUT
 
     - name: Cache node_modules
+      if: ${{ inputs.skip-cache != 'true' }}
       id: cache-nodemodules
       uses: actions/cache@v4
       with:
