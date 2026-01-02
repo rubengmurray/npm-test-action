@@ -4,10 +4,11 @@ A "batteries-included" GitHub Action to set up Node.js, install dependencies, an
 
 ## 🚀 Why use this?
 
-Most Node.js workflows require the same boilerplate over and over. This action reduces that to a single step while remaining flexible:
+Speed & Convenience!
 
-* **Smart Versioning:** REQUIRED: Automatically detects the required Node.js version from your `package.json` (`engines` field).
-* **Built-in Caching:** Automatically caches `node_modules` to make your CI runs lightning fast.
+- **Less Boilerplate:** Just check this README, and you're done.
+* **Smart Versioning:** Automatically detects the required Node.js version from your `package.json` (`engines` field).
+* **Built-in Caching:** Automatically caches `node_modules` to make your CI runs 30-40s faster!
 
 ## 📦 Usage
 
@@ -23,7 +24,8 @@ jobs:
     uses: rubengmurray/npm-test-action/.github/workflows/test.yml@main
     with:
       test-command: 'test:unit'  # Optional: defaults to 'test'
-      skip-cache: true     # Optional: prevent caching (can be used to avoid any potential cache issues)
+      skip-cache: false # Optional: prevent caching (can be used to avoid any potential cache issues)
+      skip-draft-prs: true # Optional: skip running tests on draft PRs (graceful if not PR based)
 
 ```
 
