@@ -13,9 +13,16 @@ on:
         required: false
         description: 'Set to true to skip node_modules/npm caching'
         default: 'false'
+      skip-draft-prs:
+        type: boolean
+        required: false
+        description: 'Set to true to skip draft PR check'
+        default: 'false'
 
 jobs:
   integration-test:
+    if: |
+      !(inputs.skip-draft-prs == true && github.event.pull_request.draft == true)
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
