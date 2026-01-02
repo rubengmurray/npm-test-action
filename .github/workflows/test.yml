@@ -12,12 +12,12 @@ on:
         type: boolean
         required: false
         description: 'Set to true to skip node_modules/npm caching'
-        default: 'false'
+        default: false
       skip-draft-prs:
         type: boolean
         required: false
         description: 'Set to true to skip draft PR check'
-        default: 'false'
+        default: false
 
 jobs:
   integration-test:
