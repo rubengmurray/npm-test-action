@@ -23,6 +23,7 @@ jobs:
     uses: rubengmurray/npm-test-action/.github/workflows/test.yml@main
     with:
       test-command: 'test:unit'  # Optional: defaults to 'test'
+      skip-cache: true     # Optional: prevent caching (can be used to avoid any potential cache issues)
 
 ```
 
